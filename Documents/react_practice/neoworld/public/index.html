@@ -2,89 +2,67 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>User Card</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Number Grid</title>
 <style>
-  body {
-    font-family: Arial, sans-serif;
-    display: flex;
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(8, 50px);
+    gap: 5px;
     justify-content: center;
+    margin-top: 20px;
+  }
+  .cell {
+    width: 50px;
+    height: 50px;
+    display: flex;
     align-items: center;
-    height: 100vh;
-    background: #f5f5f5;
-  }
-  .card {
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    max-width: 350px;
-    padding: 20px;
-    text-align: center;
-  }
-  .avatar {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin: 0 auto 10px;
-  }
-  h2 {
-    margin: 10px 0 5px;
-  }
-  h3 {
-    margin: 0 0 10px;
-    font-weight: normal;
-    color: gray;
-  }
-  .skills {
-    display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    gap: 8px;
-  }
-  .chip {
-    background-color: #00BCD4;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 16px;
-    font-size: 0.9em;
-  }
-  .footer {
-    margin-top: 10px;
-    font-size: 0.8em;
-    color: gray;
+    font-weight: bold;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
   }
 </style>
 </head>
 <body>
-<div class="card">
-  <img src="https://m.cricbuzz.com/a/img/v1/600x400/i1/c185852/kl-rahul-smashed-56-at-the-top-of-the-order-to-set-the-base-for-indias-chase.jpg" alt="Profile Picture" class="avatar" /> <!-- Replace with actual image URL -->
-  <h2>Nayeem King</h2>
-  <h3>Senior Developer, Finland</h3>
-  <div class="skills">
-    <div class="chip">HTML</div>
-    <div class="chip">CSS</div>
-    <div class="chip">Sass</div>
-    <div class="chip">JS</div>
-    <div class="chip">React</div>
-    <div class="chip">Redux</div>
-    <div class="chip">Node</div>
-    <div class="chip">MongoDB</div>
-    <div class="chip">Python</div>
-    <div class="chip">Flask</div>
-    <div class="chip">Django</div>
-    <div class="chip">NumPy</div>
-    <div class="chip">Pandas</div>
-    <div class="chip">Data Analysis</div>
-    <div class="chip">MySQL</div>
-    <div class="chip">GraphQL</div>
-    <div class="chip">D3.js</div>
-    <div class="chip">Gatsby</div>
-    <div class="chip">Docker</div>
-    <div class="chip">Heroku</div>
-    <div class="chip">Git</div>
-  </div>
-  <div class="footer">Joined on Aug 30, 2020</div>
-</div>
+
+<div class="grid" id="numberGrid"></div>
+
+<script>
+  const gridContainer = document.getElementById('numberGrid');
+
+  // Function to check if a number is prime
+  function isPrime(n) {
+    if (n < 2) return false;
+    for (let i = 2; i <= Math.sqrt(n); i++) {
+      if (n % i === 0) return false;
+    }
+    return true;
+  }
+
+  for (let num = 0; num <= 31; num++) {
+    const cell = document.createElement('div');
+    cell.className = 'cell';
+
+    // Determine color based on rules
+    if (num === 0) {
+      cell.style.backgroundColor = 'green';
+    } else if (num % 2 === 0) {
+      // evens
+      cell.style.backgroundColor = 'green';
+    } else if (num === 3 || isPrime(num)) {
+      // prime numbers
+      cell.style.backgroundColor = 'red';
+    } else {
+      // odds (not prime and not 3)
+      cell.style.backgroundColor = 'yellow';
+    }
+
+    cell.textContent = num;
+    gridContainer.appendChild(cell);
+  }
+</script>
+
 </body>
 </html>
