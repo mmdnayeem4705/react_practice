@@ -1,11 +1,18 @@
-import React from 'react';
+import React from 'react'
 
-function App() {
-  return (
-    <div>
-      Hello, React!
-    </div>
-  );
+// A functional component
+const Welcome = () => {
+  return <h1>Hello, Welcome to React!</h1>
 }
 
-export default App;
+// Another functional component
+const App = () => {
+  return (
+    <div>
+      <Welcome />
+      <p>This is your first React app!</p>
+    </div>
+  )
+}
+
+export default App
